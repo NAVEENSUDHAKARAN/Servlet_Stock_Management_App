@@ -35,6 +35,7 @@ public class ServerManager {
 				prepareStatement.setDouble(5, pojo.getCostPrice());
 				prepareStatement.setInt(6, 0);
 				prepareStatement.setInt(7, 0);
+	
 
 				int rows = prepareStatement.executeUpdate();
 

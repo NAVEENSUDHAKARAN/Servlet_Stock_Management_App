@@ -65,7 +65,7 @@ public class RegisterServlet extends HttpServlet {
 				{
 					manager.insertUserCred(info);
 					
-					RequestDispatcher dispatcher = request.getRequestDispatcher("home.html");
+					RequestDispatcher dispatcher = request.getRequestDispatcher("loginpage.html");
 					dispatcher.forward(request, response);
 				}
 			} catch (ClassNotFoundException | SQLException e) {
@@ -79,10 +79,16 @@ public class RegisterServlet extends HttpServlet {
 			int password = Integer.parseInt(request.getParameter("loginPassword"));
 			
 			try {
-				manager.readUserCred(name, password);
-				
-				RequestDispatcher dispatcher = request.getRequestDispatcher("home.html");
-				dispatcher.forward(request, response);
+				if(manager.readUserCred(name, password)){
+					
+					
+					RequestDispatcher dispatcher = request.getRequestDispatcher("home.html");
+					dispatcher.forward(request, response);
+				}
+				else {
+					RequestDispatcher dispatcher = request.getRequestDispatcher("loginpage.html");
+					dispatcher.forward(request, response);
+				}
 			} catch (ClassNotFoundException e) {
 				
 				e.printStackTrace();

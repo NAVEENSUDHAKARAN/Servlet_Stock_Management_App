@@ -193,31 +193,41 @@ body{
     
 }
 
-#card1{
-    /* background-color: blueviolet; */
+/* #card1{
+   
     position: relative;
-    width: 80%;
+    width: 25%;
     height: 50%;
     left: 5%;
     top: 10%;
     box-shadow: 5px 5px 5px 5px gray;
     border-radius: 8px;
     transform: translateY(0%);
-    perspective: 1000px;
-}
+    perspective: 1000px; 
+    
+    display: flex;
 
-#inner{
+flex-direction: column;
+background-color: rgb(132, 173, 209);
+transition: ease 800ms;
+} */
+
+/* #inner{
     width: 100%;
     height: 100%;
     transform-style: preserve-3d;
     transition-duration: 1s;
-}
+} */
 
-#front
+/* #front
 {
     position: fixed;
 
 }
+
+#front :hover{
+	
+} */
 
 #card1 h1{
     position:absolute;
@@ -231,11 +241,12 @@ body{
   
 }
 
-#back{
+/* #back{
     backface-visibility: hidden;
     position: fixed;
     transform: rotateY(180deg);
-}
+    z-index: 2;
+} */
 
 #whatwedo{
     position: relative;
@@ -503,6 +514,40 @@ body{
     border-radius: 6px;
 }
 
+#selectDepartments{
+    width: 200px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    appearance: none; /* Hide default arrow in some browsers */
+    -webkit-appearance: none; /* Hide default arrow in Safari */
+    -moz-appearance: none; /* Hide default arrow in Firefox */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M5 7l5 5 5-5H5z"/></svg>'); /* Custom arrow */
+    background-repeat: no-repeat;
+    background-position: right 10px top 50%;
+    background-size: 20px;
+	
+}
+
+
+#card1{
+display: flex;
+max-width: 200px;
+max-height: 100px;
+flex-direction: column;
+background-color: rgb(132, 173, 209);
+transition: ease 800ms;
+} 
+#card1:hover{
+   padding-top: 200px;
+}
+
+#goto{
+    position: absolute;
+    top: 0;
+}
+
 /*#freetext:hover{
     /* transition-duration: 1s; 
     cursor: pointer;
@@ -557,7 +602,12 @@ body{
                             
                         </div>
                         <div id="back">
-                            <a href="viewstock.html"><img style="border-radius: 8px;" src="Images/view.jpg" alt="image not working" width="260px" height="191px"></a>
+                           <!--  <a href="viewstock.html"><img style="border-radius: 8px;" src="Images/view.jpg" alt="image not working" width="260px" height="191px"></a> -->
+                           	<select id="selectDepartments">
+								<option>Mobile Phones</option>
+								<option>Fruits</option>
+								<option>Jewels</option>
+							</select>
                         </div>
                         
                     
@@ -566,32 +616,27 @@ body{
             </div>
             <div id="card1">
                 <!-- <h1 id="featureswehave" style="font-size: x-large; color: white;" >Features We Have!</h1> -->
-                <div id="inner">
                     <div id="front">
                         <a href="addstock.html"><img src="Images/addstockImg.jpg" style="border-radius: 8px" alt="Image is Not Working" width="252.2px" height="191px"></a>       
                     </div>
                     <div id="back">
-                        <a href="addstock.html"><img style="border-radius: 8px;" src="Images/add.png" alt="image not working" width="260px" height="191px"></a>
-                    </div>    
-            </div>
-                
+                        <a href="addstock.html"><img style="border-radius: 8px;" src="Images/add.png" alt="image not working" width="260px" height="191px"></a>  
+            		</div>
             </div>
             <div id="card1">
                 <!-- <h1 id="help" style="font-size: xxx-large;" >Help?</h1> -->
-                <div id="inner">
-                    <div id="front">
-                        <a href=""><img src="Images/removestockimg.jpg" style="border-radius: 8px" alt="Image is Not Working" width="252.2px" height="191px"></a>       
+                	<div id="front">
+                        <a id="goto" href="">goto</a>
+                        <img src="Images/removestock.png" alt="Image is Not Working">       
                     </div>
-                    <div id="back">
-                        <a href="removestock.html"><img src="Images/removestock.png" style="border-radius: 8px" alt="Image is Not Working" width="260px" height="191px"></a>
-                    </div> 
-                </div>    
             </div>
 
             <div id="card1">
                 <h1 id="contact" style="font-size: xxx-large;" >Contact</h1>
-                <img src="Images/contactbg.png" style="border-radius: 8px" alt="Image is Not Working" width="100%" height="100%">
-               
+               <div id="innerDiv">
+			        <a id="goto" href="">goto4</a>
+			        <img src="Images/contactbg.png" alt="not working">
+    			</div>
             </div>
         </div>
 
