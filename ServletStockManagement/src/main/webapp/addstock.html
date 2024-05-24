@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Stock</title>
+</head>
+<style>
+    body{
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+
+#mainDiv{
+    /* background-color: rgb(166, 210, 210); */
+    z-index: -5;
+    position: absolute;
+    object-fit: cover;
+    width: 102vw;
+    height: 102vh;
+    padding: 0;
+    margin: 0;
+}
+#navbarDiv{
+        position: relative;
+        background-color: rgb(70, 96, 190);
+        width: 100vw;
+        height: 10vh;
+    }
+#home{
+        
+        position: absolute;
+        font-size: large;
+        color: aliceblue;
+        left: 10%;
+        top: 10px;
+        text-decoration: none;
+    }
+
+    #home:hover{
+        background-color: rgb(109, 135, 230);
+        border-radius: 5px;
+        color: black;
+    }
+
+#back{
+   
+    position: absolute;
+    display: flex;
+    width: 4%;
+    border-radius: 2px;
+    color: aliceblue;
+    left: 20%;
+
+    top: 30px;
+    
+    text-decoration: none;
+    
+}
+#back:hover{
+    color: black;
+}
+
+#addStock{
+    background-color: transparent;
+    position: relative;
+    width: 50%;
+    height: 50%;
+    left: 20%;
+    top: 10%;
+    box-shadow: 5px 5px 5px 5px grey;
+    border-radius: 5px;   
+    border-radius: 8px; 
+
+}
+
+#inputs{
+    position: relative;
+    left: 35%;
+    top: 25%;
+}
+
+#name{
+    width: 25%;
+    height: 5vh;
+    border-radius: 7px;
+    justify-self: center;
+    
+}
+
+#stock{
+    width: 25%;
+    height: 5vh;
+    border-radius: 7px;
+    justify-self: center;
+    
+}
+
+#addBtn{
+    width: 13vw;
+    height: 6.5vh;
+    border-radius: 6px;
+}
+
+#addBtn:hover{
+    cursor: pointer;
+    color: aliceblue;
+    
+    background-color:  rgb(2, 24, 97);
+}
+
+#display{
+    position: relative;
+    height: 20%;
+    top: 25%;
+}
+
+</style>
+<body >
+    
+    <div id="mainDiv">
+        <div id="navbarDiv">
+            <nav>
+                <a style="padding: 10px;" id="home" href="home.html">Home</a>
+                <!-- <a id="back" href="functionalities.html">Back</a> -->
+            </nav>
+        </div>
+        <!-- <img src="C:\Users\nave3557\vscode\Practice\Images\addstockbg.jpg" alt="Image Not Working" width="98.5%" height="98.5%">     -->
+        <div id="addStock">
+           <div id="inputs">
+            <input id="name" type="text" placeholder="Enter The Product Name ">
+            <br><br>
+            <input id="stock" type="number" placeholder="Enter The Stock To Add ">
+            <br><br>
+            <input id="addBtn" onclick="alert('Stock Updated')" type="button" value="Add Stock" >
+           </div>
+            
+           <div id="display">
+                <p id="displayContent"></p>
+           </div>
+        </div>
+    </div>
+   
+</body>
+<script>
+
+    var arr = [];
+    
+    event.addEventListener("click", function(e) {
+        let newPtag = 
+        document.getElementById("displayContent").innerText = newPtag
+        arr.push()
+    }) 
+
+</script>
+</html>

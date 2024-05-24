@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+   
+</head>
+<style >
+
+    body{
+        margin: 0;
+        padding: 0;
+        /* overflow: hidden; */
+    }
+
+    /* #div{
+        position: absolute;
+      } */
+
+    #loginBG{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        bottom: 0%;
+        
+        
+    }
+
+    #mainDiv{
+        position: relative;
+        background-color: transparent;
+        width: 30%;
+        height: 90vh;
+        left: 60%;
+        top: 10px;
+        bottom: 20%;
+        border-radius: 5%;
+        box-shadow: 5px 5px 5px 5px rgb(59, 59, 250);
+    }
+
+    #logIN{
+        position: relative;
+        display: flex;
+        justify-content: center;
+        padding-top: 5%;
+    }
+
+    #userName{
+        position: relative;
+        width: 20vw;
+        height: 5vh;
+        border-radius: 10px;
+        box-shadow: 5px 5px 0px 0px #756c6c;
+        border-style: ridge;
+    }
+
+    #passWord{
+        position: relative;
+        width: 20vw;
+        height: 5vh;
+        border-radius: 10px;
+        box-shadow: 5px 5px 0px 0px #756c6c;
+        border-style: ridge;
+    }
+
+    #btn{
+        position: relative;
+        width: 10vw;
+        height: 5vh;
+        font-family: 'Times New Roman', Times, serif;
+        border-radius: 5px;
+    }
+
+    #btn:hover{
+        cursor: pointer;
+        background-color:  rgb(43, 43, 246);
+    }
+
+    #createAccount{
+        position: absolute;
+        display: flex;
+        font-weight: 400;
+        color: black;
+        left: 25%;
+        bottom: 25%;
+    }
+
+    #createAccount:hover{
+        color:  rgb(43, 43, 246);
+    }
+
+    #imgDiv{
+        /* background-color: antiquewhite; */
+        width: 50vw;
+        height: 80vh;
+        position: absolute;
+        top: 10%;
+        left: 5%;
+    }
+
+</style>
+<body>
+    
+   
+<div id="div">
+    <!-- <img id="loginBG" src="C:/Users/nave3557/vscode/Practice/Images/login_page_bg.jpg" alt="Background Image is Not Working" width="98vw"> -->
+    <div id="imgDiv">
+        <img src="Images/loginpagebg.jpg" alt="Image Not Working" width="90%" height="90%">
+    </div>
+    <div id="mainDiv">
+        
+        <div>
+            <form action="RegisterServlet" method="post">
+                <h1 id="logIN" style="color: rgb(43, 43, 246);">LogIN</h1>
+                <br/>
+                <br/>
+                <input type="hidden" name="action" value="logIN">
+                <div id="loginSetUp"><center><input id="userName" name="loginName" type="text" placeholder="Enter Your Name"/>
+                    <br/>
+                    <br/>
+                    <input id="passWord" type="password" name="loginPassword"  placeholder="Enter Password"/>
+                    <br/>
+                    <br/>
+                   <button id="btn">Submit</button></center> 
+                
+            </form>
+        </div> 
+    </div>
+        <div>
+            <a id="createAccount" href="RegistrationForm.html">Click here to Create Account</a>
+        </div>
+    </div>
+
+</div>
+
+    
+    
+    
+    <table></table>
+</body>
+</html> 

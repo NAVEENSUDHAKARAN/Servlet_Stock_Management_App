@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+</head>
+<style>
+    body{
+        margin: 0;
+        padding: 0;
+    }
+    #navbarDiv{
+        position: relative;
+        background-color: rgb(70, 96, 190);
+        width: 100vw;
+        height: 10vh;
+    }
+
+#home{
+        
+        position: absolute;
+        font-size: large;
+        color: aliceblue;
+        left: 10%;
+        top: 10px;
+        text-decoration: none;
+    }
+
+    #home:hover{
+        background-color: rgb(109, 135, 230);
+        border-radius: 5px;
+        color: black;
+    }
+
+#cartMessage{
+    position: relative;
+    left: 30%;
+    top: 25%;
+}
+
+#thanksMessage{
+    position: relative;
+    left: 10%;
+}
+
+</style>
+<body>
+    <div id="mainDiv">
+        <div id="navbarDiv">
+            <nav>                  
+                <a style="padding: 10px;" id="home" href="home.html">Home</a>
+            </nav>
+        </div>
+        <div id="cartMessage">
+            <h1>SuccessFully Added to Cart!!!</h1>
+            <h2 id="thanksMessage">!!!Thank You!!!</h2>
+        </div>
+    </div>
+</body>
+</html>

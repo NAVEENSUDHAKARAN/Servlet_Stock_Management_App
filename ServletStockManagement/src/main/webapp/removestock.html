@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remove Stock</title>
+</head>
+<style>
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+   #navbarDiv{
+        position: relative;
+        background-color: rgb(70, 96, 190);
+        width: 100vw;
+        height: 10vh;
+    }
+
+    #back{
+        position: absolute;
+        color: aliceblue;
+        left: 20%;
+        top: 10px;
+        
+        text-decoration: none;
+        align-items: center;
+        font-size: large;
+        
+    }
+    #back:hover{
+        color: black;
+        background-color: rgb(109, 135, 230);
+        border-radius: 5px;
+    }
+
+    #home{
+        
+        position: absolute;
+        font-size: large;
+        color: aliceblue;
+        left: 10%;
+        top: 10px;
+        text-decoration: none;
+    }
+
+    #home:hover{
+        background-color: rgb(109, 135, 230);
+        border-radius: 5px;
+        color: black;
+    }
+
+      #tableDiv{
+        position: absolute;
+        background-color: whitesmoke;
+        width: 70%;
+        height: 80%;
+        left: 15%;
+        top: 15%;
+        box-shadow: 5px 5px 5px 5px grey; 
+        border-radius: 8px;
+    }
+   
+   #viewStockTable
+    {
+        position: relative;
+        left: 15%;
+        top: 9%;
+        width: 70%;
+        height: 80%;
+        justify-self: center;
+        border-radius: 8px;
+    }
+
+    #viewStockTable :hover{
+        cursor: pointer;
+
+    }
+</style>
+<body>
+    <div id="mainDiv">
+        <div id="navbarDiv">
+            <nav>
+                <a id="home" style="padding: 10px;" href="home.html">Home</a>
+                <!-- <a id="back" style="padding: 10px;" href="home.html">Back</a> -->
+            </nav>
+        </div>
+        <div id="tableDiv" >
+            <table id="viewStockTable" border="1">
+                <tr align="center"  style="background-color: #2774AE;">
+                    <td >ID</td>
+                    <td>ProductName</td>
+                    <td >NumberOfStock</td>
+                    <td>Stocked_date</td>
+                    <td id="price">Price</td>
+                </tr>
+                <tr align="center" style="background-color: #F0F8FF">
+                    <td>101</td>
+                    <td>Apple</td>
+                    <td>20</td>
+                    <td>01/01/2024</td>
+                    <td >120</td>
+                </tr>
+                <tr align="center" style="background-color: #4B9CD3">
+                    <td>102</td>
+                    <td>Mango</td>
+                    <td>15</td>
+                    <td>01/01/2024</td>
+                    <td >60</td>
+                </tr>
+                <tr align="center" style="background-color: #F0F8FF">
+                    <td>103</td>
+                    <td>Orange</td>
+                    <td>25</td>
+                    <td>01/01/2024</td>
+                    <td>80</td>
+                </tr>
+                <tr align="center" style="background-color: #4B9CD3"  >
+                    <td>104</td>
+                    <td>Grapes</td>
+                    <td>30</td>
+                    <td>01/01/2024</td>
+                    <td>50</td>
+                </tr>
+                <tr align="center" style="background-color: #F0F8FF"> 
+                    <td>105</td>
+                    <td>Banana</td>
+                    <td>20</td>
+                    <td>01/01/2024</td>
+                    <td>100</td>
+                </tr>
+            </table>
+        </div> 
+        <div id="cart">
+
+        </div>
+    </div>
+</body>
+<script>
+      var cells = document.querySelectorAll("#viewStockTable tr");
+   
+   for (var i = 0; i < cells.length; i++) {
+
+   cells[i].addEventListener("click", function() {
+   document.getElementById("viewStockTable").deleteRow(i.valueOf);
+   
+});
+
+}
+</script>
+</html>
