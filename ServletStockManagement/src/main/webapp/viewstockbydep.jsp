@@ -1,3 +1,6 @@
+<%@page import="com.chainsys.dao.ServerManager"%>
+<%@ page import="java.util.ArrayList"%>
+<%@page import="com.chainsys.model.StockInfo"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,10 +55,12 @@
 
    #tableDiv{
         position: absolute;
+        display: flex;
         background-color: whitesmoke;
-        width: 70%;
-        height: 80%;
+        width: 60%;
+        max-height:max-content;
         left: 2%;
+        padding: 30px;
         top: 15%;
         box-shadow: 5px 5px 5px 5px grey; 
         border-radius: 8px;
@@ -64,10 +69,10 @@
    #viewStockTable
     {
         position: relative;
-        left: 15%;
+        left: 10%;
         top: 9%;
         width: 70%;
-        height: 80%;
+        height: 20%;
         justify-self: center;
         border-radius: 8px;
     }
@@ -108,64 +113,100 @@
    #submitBtn:hover{
     cursor: pointer;
    }
+   
+   #viewStockTable tr:nth-child(even){background-color: #8294C4;}
+   #viewStockTable  tr:nth-child(odd) {
+	background-color:#DDE6ED;}
+	#viewStockTable tr:first-child{background-color: #476072;}
+	#viewStockTable td{padding:5px;}
+	
+  #selectDepartments{
+	position: relative;
+    width: 150px;
+    padding: 10px;
+    left: 55%;
+    top: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    appearance: none; /* Hide default arrow in some browsers */
+    -webkit-appearance: none; /* Hide default arrow in Safari */
+    -moz-appearance: none; /* Hide default arrow in Firefox */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M5 7l5 5 5-5H5z"/></svg>'); /* Custom arrow */
+    background-repeat: no-repeat;
+    background-position: right 10px top 50%;
+    background-size: 20px;
+	
+}
 
-  
+#departmentSelect{
+	position: relative;
+    width: 150px;
+    padding: 10px;
+    left: 55%;
+    top: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
 </style>
 <body>
     <div id="mainDiv">
         <div id="navbarDiv">
             <nav>
-                <a id="home" style="padding: 10px;" href="home.html">Home</a>
+                <a id="home" style="padding: 10px;" href="home.jsp">Home</a>
                 <!-- <a id="back" style="padding: 10px;" href="functionalities.html">Back</a> -->
             </nav>
         </div>
-        <div id="tableDiv" >
-            <table id="viewStockTable" border="1">
-                <tr align="center"  style="background-color: #2774AE;">
-                    <td >ID</td>
-                    <td>ProductName</td>
-                    <td >NumberOfStock</td>
-                    <td>Stocked_date</td>
-                    <td id="price">Price</td>
-                </tr>
-                <tr align="center" style="background-color: #F0F8FF">
-                    <td>101</td>
-                    <td>Apple</td>
-                    <td>20</td>
-                    <td>01/01/2024</td>
-                    <td >120</td>
-                </tr>
-                <tr align="center" style="background-color: #4B9CD3">
-                    <td>102</td>
-                    <td>Mango</td>
-                    <td>15</td>
-                    <td>01/01/2024</td>
-                    <td >60</td>
-                </tr>
-                <tr align="center" style="background-color: #F0F8FF">
-                    <td>103</td>
-                    <td>Orange</td>
-                    <td>25</td>
-                    <td>01/01/2024</td>
-                    <td>80</td>
-                </tr>
-                <tr align="center" style="background-color: #4B9CD3"  >
-                    <td>104</td>
-                    <td>Grapes</td>
-                    <td>30</td>
-                    <td>01/01/2024</td>
-                    <td>50</td>
-                </tr>
-                <tr align="center" style="background-color: #F0F8FF"> 
-                    <td>105</td>
-                    <td>Banana</td>
-                    <td>20</td>
-                    <td>01/01/2024</td>
-                    <td>100</td>
-                </tr>
-            </table>
-            
-        </div> 
+       <div id="tableDiv">
+       
+        <table id="viewStockTable" border="1">
+		<tr >
+			<td>ID</td>
+			<td>ProductName</td>
+			<td>NumberOfStock</td>
+			<td>StockedDate</td>
+			<td>Price</td>
+		</tr>
+		<%
+		ServerManager server = new ServerManager();
+		StockInfo info = (StockInfo) request.getAttribute("pojo");
+		ArrayList<StockInfo> arrList = server.readStockServlet(info);	
+		for (StockInfo user : arrList) {
+			
+		%>
+		<tr>
+			<td><%=user.getId()%></td>
+			<td><%=user.getProductName()%></td>
+			<td><%=user.getNumberOfStock()%></td>
+			<td><%=user.getStockedDate()%></td>
+			<td><%=user.getCostPrice()%></td>
+		</tr>
+
+		<%
+		}
+		%>
+	</table>
+     
+     <div id="selectDepartmentDiv">
+     	<form action="Departments" method="get">
+ 
+ 
+     		<select id="selectDepartments" name="departments" >
+				<option  value="phone" >Mobile Phones</option>
+				<option  value="fruit">Fruits</option>
+				<option  value="jewel">Jewels</option>
+			</select>
+			<br><br>
+     		<input id="departmentSelect" type="submit" value="Filter" >
+     	</form>
+     	
+     </div>  
+       
+   </div>
+    
+   </div> 
         <div id="cartDiv">
             <br>
               <div id="selectedDetails">

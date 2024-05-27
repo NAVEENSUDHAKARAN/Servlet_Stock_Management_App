@@ -1,3 +1,5 @@
+<%@ page session="true" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -100,7 +102,7 @@ body{
     width: 10vw;
     color: black;
     position: relative;
-    top: 35px;
+    top: 15px;
     right: 25px;
     box-shadow: 5px 5px 5px 5px gray;
     border-radius: 5px; 
@@ -193,41 +195,31 @@ body{
     
 }
 
-/* #card1{
-   
+#card1{
+    /* background-color: blueviolet; */
     position: relative;
-    width: 25%;
+    width: 80%;
     height: 50%;
     left: 5%;
     top: 10%;
     box-shadow: 5px 5px 5px 5px gray;
     border-radius: 8px;
     transform: translateY(0%);
-    perspective: 1000px; 
-    
-    display: flex;
+    perspective: 1000px;
+}
 
-flex-direction: column;
-background-color: rgb(132, 173, 209);
-transition: ease 800ms;
-} */
-
-/* #inner{
+#inner{
     width: 100%;
     height: 100%;
     transform-style: preserve-3d;
     transition-duration: 1s;
-} */
+}
 
-/* #front
+#front
 {
     position: fixed;
 
 }
-
-#front :hover{
-	
-} */
 
 #card1 h1{
     position:absolute;
@@ -241,12 +233,11 @@ transition: ease 800ms;
   
 }
 
-/* #back{
+#back{
     backface-visibility: hidden;
     position: fixed;
     transform: rotateY(180deg);
-    z-index: 2;
-} */
+}
 
 #whatwedo{
     position: relative;
@@ -515,6 +506,7 @@ transition: ease 800ms;
 }
 
 #selectDepartments{
+	position: relative;
     width: 200px;
     padding: 10px;
     font-size: 16px;
@@ -530,22 +522,20 @@ transition: ease 800ms;
 	
 }
 
-
-#card1{
-display: flex;
-max-width: 200px;
-max-height: 100px;
-flex-direction: column;
-background-color: rgb(132, 173, 209);
-transition: ease 800ms;
-} 
-#card1:hover{
-   padding-top: 200px;
+#serviceBtn{
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: white;
+    border: 1px none #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 300; 
+    font-size:medium;
+    font-style: italic;
 }
 
-#goto{
-    position: absolute;
-    top: 0;
+#serviceBtn:hover {
+    color: rgb(70, 96, 190);
 }
 
 /*#freetext:hover{
@@ -557,14 +547,32 @@ transition: ease 800ms;
 
 </style>
 <body>
+<%
+
+response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+response.setHeader("Expires", "0"); // Proxies.
+
+    if (session == null || session.getAttribute("loginName") == null) {
+        response.sendRedirect("loginpage.html");
+        return;
+    }
+
+%>
     <div id="mainDiv">
             <ol id="navbarDiv">
                 <a href="home.html"><li id="home" style="font-weight: 600; font-size: x-large;" >Home</li></a>
                 <li id="services" style="font-weight: 600; font-size: x-large;">Services
                     <ul id="menu"><br>
-                        <a href="viewstock.html" style="text-decoration: none; color: black; font-weight: 300; font-size: large;"><li>View Stock</li><br></a>
-                        <a href="" style="text-decoration: none; color: black; font-weight: 300; font-size: large;"><li>Add Stock</li><br></a>
-                        <a href="" style="text-decoration: none; color: black; font-weight: 300; font-size: large;"><li>Remove Stock</li><br></a>
+                    	<form action="RegisterServlet" method="get">
+                    		<input type="hidden"  >
+                    		<button name="action" value="viewStock" id="serviceBtn">View Stock</button></center> 
+                    		<!-- <a style="text-decoration: none; color: black; font-weight: 300; font-size: large;"><li>View Stock</li><br></a> -->
+	                       	
+                    		<button name="action" value="addStock" id="serviceBtn">Add Stock</button></center> 
+	                        <!-- <a href="" style="text-decoration: none; color: black; font-weight: 300; font-size: large;"><li>Add Stock</li><br></a> -->
+	                        <a href="" style="text-decoration: none; color: black; font-weight: 300; font-size: large;"><li>Remove Stock</li><br></a>
+                    	</form>
                     </ul>
                 </li>
                 <a href="" style="text-decoration: none;"><li id="contactNav" style="font-weight: 600; font-size: x-large;">Contact</li></a>
@@ -577,6 +585,9 @@ transition: ease 800ms;
                     </div>
                     <div id="signUP">
                         <a href="RegistrationForm.html"><button id="signupBtn" >SignUP</button></a>
+                    </div>
+                    <div id="signUP">
+                        <a href="loginpage.html" name="action" value="logout" ><button id="signupBtn" >Logout</button></a>
                     </div>
                  
                 </div>
@@ -603,7 +614,7 @@ transition: ease 800ms;
                         </div>
                         <div id="back">
                            <!--  <a href="viewstock.html"><img style="border-radius: 8px;" src="Images/view.jpg" alt="image not working" width="260px" height="191px"></a> -->
-                           	<select id="selectDepartments">
+                         <select id="selectDepartments">
 								<option>Mobile Phones</option>
 								<option>Fruits</option>
 								<option>Jewels</option>
@@ -616,27 +627,32 @@ transition: ease 800ms;
             </div>
             <div id="card1">
                 <!-- <h1 id="featureswehave" style="font-size: x-large; color: white;" >Features We Have!</h1> -->
+                <div id="inner">
                     <div id="front">
                         <a href="addstock.html"><img src="Images/addstockImg.jpg" style="border-radius: 8px" alt="Image is Not Working" width="252.2px" height="191px"></a>       
                     </div>
                     <div id="back">
-                        <a href="addstock.html"><img style="border-radius: 8px;" src="Images/add.png" alt="image not working" width="260px" height="191px"></a>  
-            		</div>
+                        <a href="addstock.html"><img style="border-radius: 8px;" src="Images/add.png" alt="image not working" width="260px" height="191px"></a>
+                    </div>    
+            </div>
+                
             </div>
             <div id="card1">
                 <!-- <h1 id="help" style="font-size: xxx-large;" >Help?</h1> -->
-                	<div id="front">
-                        <a id="goto" href="">goto</a>
-                        <img src="Images/removestock.png" alt="Image is Not Working">       
+                <div id="inner">
+                    <div id="front">
+                        <a href=""><img src="Images/removestockimg.jpg" style="border-radius: 8px" alt="Image is Not Working" width="252.2px" height="191px"></a>       
                     </div>
+                    <div id="back">
+                        <a href="removestock.html"><img src="Images/removestock.png" style="border-radius: 8px" alt="Image is Not Working" width="260px" height="191px"></a>
+                    </div> 
+                </div>    
             </div>
 
             <div id="card1">
                 <h1 id="contact" style="font-size: xxx-large;" >Contact</h1>
-               <div id="innerDiv">
-			        <a id="goto" href="">goto4</a>
-			        <img src="Images/contactbg.png" alt="not working">
-    			</div>
+                <img src="Images/contactbg.png" style="border-radius: 8px" alt="Image is Not Working" width="100%" height="100%">
+               
             </div>
         </div>
 

@@ -1,12 +1,30 @@
 package com.chainsys.model;
 
+import javax.servlet.RequestDispatcher;
+
 public class StockInfo {
 
 	String adminName;
-	int password;
+	int password, maxRange, minRange;
 	String productName, stockedDate;
 	int id, numberOfStock;
 	double costPrice;
+	
+	public int getMaxRange() {
+		return maxRange;
+	}
+
+	public void setMaxRange(int maxRange) {
+		this.maxRange = maxRange;
+	}
+
+	public int getMinRange() {
+		return minRange;
+	}
+
+	public void setMinRange(int minRange) {
+		this.minRange = minRange;
+	}
 
 	public String getProductName() {
 		return productName;
@@ -64,6 +82,8 @@ public class StockInfo {
 		this.password = password;
 	}
 
+	
+	
 	@Override
 	public String toString() {
 		return "StockPojo [productName=" + productName + ", stockedDate=" + stockedDate + ", id=" + id

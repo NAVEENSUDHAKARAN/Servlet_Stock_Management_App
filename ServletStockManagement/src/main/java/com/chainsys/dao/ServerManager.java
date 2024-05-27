@@ -160,6 +160,36 @@ public class ServerManager {
 			System.out.println();
 		}
 	}
+	
+	public static ArrayList<StockInfo> readEntireStock() throws ClassNotFoundException, SQLException {
+		 ArrayList<StockInfo> userDetailsList = new ArrayList<>();
+		    
+		    try {
+		        Connection connection = ConnectUtil.getConnection();
+		        String query = "SELECT * FROM Add_Stock_Details";
+		        PreparedStatement preparedStatement = connection.prepareStatement(query);
+		        ResultSet resultSet = preparedStatement.executeQuery();
+		        
+		        while (resultSet.next()) {
+		            StockInfo userDetails = new StockInfo();
+		            userDetails.setId(resultSet.getInt("ID"));
+		            userDetails.setProductName(resultSet.getString("Product_Name"));
+		            userDetails.setNumberOfStock(resultSet.getInt("Number_of_Stock"));
+		            userDetails.setStockedDate(resultSet.getString("Stocked_Date"));
+		            userDetails.setCostPrice(resultSet.getInt("Price"));
+		            userDetailsList.add(userDetails);
+		        }
+		        
+		        resultSet.close();
+		        preparedStatement.close();
+		        connection.close();
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+		    
+		    return userDetailsList;
+	}
+	
 
 	public static void readStock(int id1, int id2) throws ClassNotFoundException, SQLException {
 		ConnectUtil connect = new ConnectUtil();
@@ -437,5 +467,39 @@ public class ServerManager {
 		}
 
 	}
+	
+	public ArrayList<StockInfo> readStockServlet(StockInfo pojo) throws ClassNotFoundException, SQLException {
+		 ArrayList<StockInfo> userDetailsList = new ArrayList<>();
+		    
+		    try {
+		        Connection connection = ConnectUtil.getConnection();
+		        String query = "select ID,Product_Name,Number_of_Stock,Stocked_Date ,Price from Add_Stock_Details where ID >= ? and ID < ?";
+				PreparedStatement prepareStatement = connection.prepareStatement(query);
+				
+				prepareStatement.setInt(1,pojo.getMinRange());
+				prepareStatement.setInt(2, pojo.getMaxRange());
+				
+		        ResultSet resultSet = prepareStatement.executeQuery();
+		        
+		        while (resultSet.next()) {
+		            StockInfo userDetails = new StockInfo();
+		            userDetails.setId(resultSet.getInt("ID"));
+		            userDetails.setProductName(resultSet.getString("Product_Name"));
+		            userDetails.setNumberOfStock(resultSet.getInt("Number_of_Stock"));
+		            userDetails.setStockedDate(resultSet.getString("Stocked_Date"));
+		            userDetails.setCostPrice(resultSet.getInt("Price"));
+		            userDetailsList.add(userDetails);
+		        }
+		        
+		        resultSet.close();
+		        prepareStatement.close();
+		        connection.close();
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+		    
+		    return userDetailsList;
+	}
+
 
 }

@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.chainsys.dao.ServerManager;
 import com.chainsys.model.StockInfo;
@@ -35,6 +36,37 @@ public class RegisterServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		System.out.println("Get");
+		
+		String choice = request.getParameter("action");
+		System.out.println("choice" + choice);
+		
+		if(choice.equals("viewStock"))
+		{
+			try {
+				manager.readEntireStock();
+//				RequestDispatcher dispatcher = request.getRequestDispatcher("viewstock.jsp");
+//				dispatcher.forward(request, response);
+				
+				response.sendRedirect("viewstock.jsp");
+				
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+		}
+		else if(choice.equals("addStock"))
+		{
+			
+				
+//				RequestDispatcher dispatcher = request.getRequestDispatcher("RegistrationForm.html");
+//				dispatcher.forward(request, response);
+			
+			response.sendRedirect("RegistrationForm.html");
+		}		
+		
 	}
 
 	/**
@@ -58,15 +90,19 @@ public class RegisterServlet extends HttpServlet {
 				if(!manager.retrieveUserCred(info))
 				{
 					System.out.println("UserName Exist");
-					RequestDispatcher dispatcher = request.getRequestDispatcher("RegistrationForm.html");
-					dispatcher.forward(request, response);
+//					RequestDispatcher dispatcher = request.getRequestDispatcher("RegistrationForm.html");
+//					dispatcher.forward(request, response);
+					
+					 response.sendRedirect("RegistrationForm.html");
 				}
 				else
 				{
 					manager.insertUserCred(info);
 					
-					RequestDispatcher dispatcher = request.getRequestDispatcher("loginpage.html");
-					dispatcher.forward(request, response);
+//					RequestDispatcher dispatcher = request.getRequestDispatcher("loginpage.html");
+//					dispatcher.forward(request, response);
+					
+					 response.sendRedirect("loginpage.html");
 				}
 			} catch (ClassNotFoundException | SQLException e) {
 				
@@ -79,15 +115,20 @@ public class RegisterServlet extends HttpServlet {
 			int password = Integer.parseInt(request.getParameter("loginPassword"));
 			
 			try {
+				HttpSession session = request.getSession();
 				if(manager.readUserCred(name, password)){
 					
+					session.setAttribute("loginName", name);
+//					RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
+//					dispatcher.forward(request, response);
 					
-					RequestDispatcher dispatcher = request.getRequestDispatcher("home.html");
-					dispatcher.forward(request, response);
+					 response.sendRedirect("home.jsp");
 				}
 				else {
-					RequestDispatcher dispatcher = request.getRequestDispatcher("loginpage.html");
-					dispatcher.forward(request, response);
+//					RequestDispatcher dispatcher = request.getRequestDispatcher("loginpage.html");
+//					dispatcher.forward(request, response);
+					
+					 response.sendRedirect("loginpage.html");
 				}
 			} catch (ClassNotFoundException e) {
 				
@@ -95,6 +136,15 @@ public class RegisterServlet extends HttpServlet {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+		}
+		else if(choice.equals("logout"))
+		{
+			 HttpSession session = request.getSession(false);
+		        if (session != null) {
+		            session.invalidate();
+		        }
+	        response.sendRedirect("loginpage.html");
+		        
 		}
 		
 	}
