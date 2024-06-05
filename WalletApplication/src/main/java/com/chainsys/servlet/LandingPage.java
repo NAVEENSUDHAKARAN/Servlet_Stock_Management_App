@@ -69,7 +69,7 @@ public class LandingPage extends HttpServlet {
 				}
 				else {
 					System.out.println("Email Already Exist!");
-					request.setAttribute("message", "Email Already Exist!");
+					request.setAttribute("message", "Account Already Exist!");
 					request.getRequestDispatcher("RegistrationForm.jsp").forward(request, response);
 
 				}
