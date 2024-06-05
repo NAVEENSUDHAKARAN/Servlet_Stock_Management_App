@@ -45,6 +45,7 @@ public class RegisterServlet extends HttpServlet {
 		{
 			try {
 				manager.readEntireStock();
+				System.out.println(manager.readEntireStock());
 //				RequestDispatcher dispatcher = request.getRequestDispatcher("viewstock.jsp");
 //				dispatcher.forward(request, response);
 				

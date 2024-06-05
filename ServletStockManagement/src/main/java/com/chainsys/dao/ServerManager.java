@@ -489,6 +489,7 @@ public class ServerManager {
 		            userDetails.setStockedDate(resultSet.getString("Stocked_Date"));
 		            userDetails.setCostPrice(resultSet.getInt("Price"));
 		            userDetailsList.add(userDetails);
+		 
 		        }
 		        
 		        resultSet.close();
