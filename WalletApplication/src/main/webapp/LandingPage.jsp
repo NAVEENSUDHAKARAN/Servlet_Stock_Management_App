@@ -319,18 +319,23 @@ to {
 
  .dropdown-menu a.dropdown-item:active {
         background-color: black;
-        color: white; /* Change text color if needed */
+        color: white; 
+    }
+    
+    .dropdown-menu button.dropdown-item:active {
+        background-color: black;
+        color: white; 
     }
    
    #dropdownDiv{
    		padding-top: 40px;
    }
    
-   #dropdown{
+   /* #dropdown{
    		border: 2px groove #3c445c;
    		height: 51px;
    		padding-bottom: 10px;
-   } 
+   }  */
 
 </style>
 <body>
@@ -393,7 +398,7 @@ to {
 								<div id="dropdownDiv">
 									<ul id="dropdown-menu" class="dropdown-menu"
 									aria-labelledby="dropdownMenuButton">
-									<li><a class="dropdown-item" href="#">Profile</a></li>
+									<li><a class="dropdown-item" href="ProfilePage.jsp">Profile</a></li>
 									<form action="Logout" method="post">
 									<li><button class="dropdown-item" >Logout</button></li>
 									</form>
@@ -458,7 +463,7 @@ to {
 						</h5>
 						<p class="card-text">to any Digipay User or Bank Account.</p>
 						<!-- <a onclick="openTransferDialog()" style="background-color: #3c445c; border-color: black;" class="btn btn-primary">Transfer</a>  -->
-						<button onclick="openTransferDialog()"
+							<button onclick="openTransferDialog()" 
 							style="background-color: #3c445c; border-color: black;"
 							class="btn btn-primary">Transfer</button>
 
@@ -512,11 +517,10 @@ to {
 				</p>
 				<p>
 					<img src="images/mailgif.gif" alt="gif not working" width="15px"
-						height="15px">naveensudhakaran@gmail.com
+						height="15px">naveensudhakaran2@gmail.com
 				</p>
 				<p>
-					<img src="images/phonegif.gif" alt="image not working" width="15px"
-						height="15px">6382401736
+					<img src="images/phonegif.gif" alt="image not working" width="15px" height="15px">6382401736
 				</p>
 			</div>
 		</div>
@@ -527,18 +531,33 @@ function openTransferDialog() {
     Swal.fire({
         icon: 'info',
         title: 'Enter Account Number',
-        html: '<input id="amountInput" class="swal2-input" placeholder="Enter Account Number">',
+        html: '<form id="transferForm" action="CreateAccount" method="post">' +
+              '<input type="hidden" name="action" value="transfer">' +
+              '<input id="amountInput" class="swal2-input" name="accountNumber" type="text" placeholder="Enter Account Number">' +
+              '</form>',
         showCancelButton: true,
         confirmButtonText: 'Ok',
         cancelButtonText: 'Cancel',
         showLoaderOnConfirm: true,
         preConfirm: () => {
             const amount = document.getElementById('amountInput').value;
-            
             console.log('Account Number:', amount);
+            
+            return amount;
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById('transferForm').submit();
         }
     });
+    
+    document.getElementById('transferForm').addEventListener('submit', function(event) {
+        event.preventDefault(); 
+        
+        Swal.clickConfirm();
+    });
 }
+
 
 document.addEventListener("DOMContentLoaded", function() {
     var dropdownToggle = document.getElementById("dropdownMenuButton");
@@ -548,7 +567,7 @@ document.addEventListener("DOMContentLoaded", function() {
         dropdownMenu.classList.toggle("show");
     });
 
-    // Close the dropdown menu when clicking outside of it
+    
     window.addEventListener("click", function(event) {
         if (!dropdownToggle.contains(event.target)) {
             dropdownMenu.classList.remove("show");

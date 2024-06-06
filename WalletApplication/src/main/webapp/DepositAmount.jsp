@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Transaction Page</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -75,5 +76,43 @@
             <input type="submit" value="Submit">
         </form>
     </div>
+    <script>  
+    <% 
+String invalidateMessage = (String) request.getAttribute("invalidateMessage");
+String balance = (String) request.getAttribute("balance");
+
+if(invalidateMessage != null && !invalidateMessage.isEmpty()) { 
+%>
+
+Swal.fire({
+    icon: 'warning',
+    title: '<%= invalidateMessage %>',
+    showConfirmButton: true,
+    confirmButtonText: 'OK',
+    confirmButtonColor: '#3c445c',
+}).then((result) => {
+
+    if (result.isConfirmed) {
+        window.location.href = 'DepositAmount.jsp';
+    }
+});
+
+<% } else if(balance != null && !balance.isEmpty()) { %>
+
+Swal.fire({
+    icon: 'success',
+    title: 'Amount Deposited Successfully. Available Balance is: <%= balance %>',
+    showConfirmButton: true,
+    confirmButtonText: 'OK',
+    confirmButtonColor: '#3c445c',
+}).then((result) => {
+   
+    if (result.isConfirmed) {
+        window.location.href = 'LandingPage.jsp';
+    }
+});
+
+<% } %>
+    </script>
 </body>
 </html>

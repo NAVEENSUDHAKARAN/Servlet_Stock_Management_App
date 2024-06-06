@@ -91,7 +91,7 @@
 
 <script>
   <% String alertMessage = (String) request.getAttribute("message"); 
-	/* System.out.println("errrrrrror msg : " + alertMessage); */
+	System.out.println("errrrrrror msg : " + alertMessage);
     if (alertMessage != null && !alertMessage.isEmpty()) {    %> 
       Swal.fire({
         icon: 'info',
