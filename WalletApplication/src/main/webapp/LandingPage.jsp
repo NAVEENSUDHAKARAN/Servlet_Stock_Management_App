@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ page import="com.chainsys.dao.ServerManager" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,16 +63,20 @@ body {
 	width: 55%;
 	height: 90px;
 	left: 5%;
+	gap: 50px;
+
 }
 
+
 #contentDiv {
+
 	font-size: x-large;
 	position: relative;
 	display: flex;
-	width: 70%;
+	width: 90%;
 	height: 50%;
 	gap: 70px;
-	left: 60%;
+	left: 40%;
 	top: 20%;
 	justify-content: space-around;
 	color: #3c445c;
@@ -331,6 +336,24 @@ to {
    		padding-top: 40px;
    }
    
+   #profileDiv{
+   width: fit-content;
+   position: relative;
+   left: 50%;
+   }
+   
+   #walletBalanceDiv{
+
+   		width: 180px;
+   		position: absolute;
+   		bottom:-10px;
+   		left: 40%;
+   }
+   
+   #classBody{
+   		
+   }
+   
    /* #dropdown{
    		border: 2px groove #3c445c;
    		height: 51px;
@@ -343,11 +366,13 @@ to {
 	<%
 	if (session == null) {
 		response.sendRedirect("LoginPage.jsp");
-
+		
 	}
-	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); 
+ 	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); 
 	response.setHeader("Pragma", "no-cache"); 
 	response.setHeader("Expires", "0");
+	
+	ServerManager manager = new ServerManager();
 	%>
 
 	<div id="navbarDiv">
@@ -372,10 +397,23 @@ to {
 			<div id="contentDiv">
 				<a id="help" style="padding-top: 10px;">Help</a> <a id="login"
 					href="LoginPage.jsp" style="padding-top: 10px;">LogIN</a>
-				<button id="registerBtn"
-					onclick="window.location.href='RegistrationForm.jsp'">Register</button>
 				
-
+				<% 
+					if(session.getAttribute("userName") == null){
+				%>
+						<button id="registerBtn"
+					onclick="window.location.href='RegistrationForm.jsp'">Register</button>
+				<%} else{  
+					HttpSession id = request.getSession();
+					int userId = (int) id.getAttribute("userid");
+					
+				%>
+						<div id="walletBalanceDiv">
+							<span style="font-size: medium;small;">WalletBalance</span><br>
+							<img alt="image not working" src="images/walleticon.png" width="35px" height="35px"><input type="text" name="walletBalance" style="width: 70px; position:relative; border:none; left: 10px;" value="<%= manager.getWalletBalance(userId) %>"  >
+						
+						</div>	
+				<%} %>
 				<%-- <p id="welcomeNote" >Hi, <%= session.getAttribute("userName") %></p> --%>
 				<%
 					String name;
@@ -389,21 +427,25 @@ to {
 					}
 				%>
 				
-				<div id="profile" class="container mt-5">
-					<div id="profileDiv" class="d-flex justify-content-end">
-						<div id="dropdown" class="dropdown px-1 py-1">
+				<div id="profile" class="container mt-5 ">
+					<div id="profileDiv" class="d-flex justify-content-end ">
+						<div id="dropdown" class="dropdown ">
 							<button class="btn btn-outline-dark dropdown-toggle"
 								type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
 								aria-expanded="false"> <img src="images/profilelogo.png" width="25px" height="25px" alt="Profile" class="profile-icon"><%= name %></button>
+								<% 
+								if(session.getAttribute("userName") != null){
+								%>
 								<div id="dropdownDiv">
 									<ul id="dropdown-menu" class="dropdown-menu"
 									aria-labelledby="dropdownMenuButton">
 									<li><a class="dropdown-item" href="ProfilePage.jsp">Profile</a></li>
 									<form action="Logout" method="post">
 									<li><button class="dropdown-item" >Logout</button></li>
+									</ul>
 									</form>
 								</div>
-								
+							<%} %>			
 							</ul>
 						</div>
 					</div>
@@ -438,7 +480,7 @@ to {
 		<div id="row" class="row">
 			<div class="col-sm-6 mb-3 mb-sm-0">
 				<div id="row" class="card">
-					<div class="card-body">
+					<div id="classBody" class="card-body">
 						<h5 class="card-title">
 							<img alt="icon not working" src="images/bankaccounticon.png"
 								width="20px" height="20px">&nbsp; Create Bank Account
@@ -447,13 +489,18 @@ to {
 							quickly.</p>
 						<a href="CreateBankAccount.jsp"
 							style="background-color: #3c445c; border-color: black;"
-							class="btn btn-primary">Open Account</a> <a
+							class="btn btn-primary">Open Account</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
 							href="DepositAmount.jsp"
 							style="background-color: #3c445c; border-color: black;"
-							class="btn btn-primary">Deposit Amount</a>
+							class="btn btn-primary">Deposit Amount</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<a href="AccountTransferPage.jsp"
+							style="background-color: #3c445c; border-color: black;"
+							class="btn btn-primary">Transfer Money</a>
 					</div>
 				</div>
 			</div>
+				<br>
+			<br>
 			<div id="row" class="col-sm-6">
 				<div id="row" class="card">
 					<div class="card-body">
@@ -470,6 +517,7 @@ to {
 					</div>
 				</div>
 			</div>
+		
 			<div id="row1" class="col-sm-6">
 				<div id="row" class="card">
 					<div class="card-body">
@@ -528,7 +576,8 @@ to {
 </body>
 <script>
 function openTransferDialog() {
-    Swal.fire({
+	
+		Swal.fire({
         icon: 'info',
         title: 'Enter Account Number',
         html: '<form id="transferForm" action="CreateAccount" method="post">' +
@@ -556,6 +605,8 @@ function openTransferDialog() {
         
         Swal.clickConfirm();
     });
+    
+ 
 }
 
 

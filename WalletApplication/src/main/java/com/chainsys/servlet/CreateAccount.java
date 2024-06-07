@@ -71,7 +71,7 @@ public class CreateAccount extends HttpServlet {
 			//System.out.println("_____id : " + id);
 			
 			try {
-				if(!manager.checkEmail(id)) {
+				if(!manager.checkUserId(id)) {
 					try {
 						manager.createAccount(accountInfo, id);
 						response.sendRedirect("LandingPage.jsp");

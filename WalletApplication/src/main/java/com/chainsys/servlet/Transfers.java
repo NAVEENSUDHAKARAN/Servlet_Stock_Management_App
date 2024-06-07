@@ -6,19 +6,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class Logout
+ * Servlet implementation class Transfers
  */
-@WebServlet("/Logout")
-public class Logout extends HttpServlet {
+@WebServlet("/Transfers")
+public class Transfers extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Logout() {
+    public Transfers() {
         super();
 
     }
@@ -35,16 +34,10 @@ public class Logout extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
+
 		//doGet(request, response);
 		
-		
-		if(session != null)
-		{
-			 session.invalidate();
-		}
-				
-		 response.sendRedirect("LandingPage.jsp");
+		System.out.println("Transfers Post Method");
 	}
 
 }

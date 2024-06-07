@@ -107,6 +107,29 @@ public class ServerManager {
 			return 0;
 		}
 	
+	public boolean checkUserId(int id) throws ClassNotFoundException, SQLException {
+		ConnectUtil connect = new ConnectUtil();
+		Connection connection = ConnectUtil.getConnection();
+
+		String query = "select user_id from bank_accounts where user_id = ?";
+		PreparedStatement prep = connection.prepareStatement(query);
+
+		prep.setInt(1, id);
+		
+		ResultSet rows = prep.executeQuery();
+		ResultSetMetaData metaData = rows.getMetaData();
+		int columnCount = metaData.getColumnCount();
+
+		while (rows.next()) {
+			for (int i = 1; i <= columnCount; i += 1) {
+				return true;
+			}
+			System.out.println();
+		}
+		return false;
+
+	}
+	
 	public void createAccount(BankAccountInfo detail, int id) throws ClassNotFoundException, SQLException{
 		
 		ConnectUtil connect = new ConnectUtil();
@@ -482,5 +505,30 @@ public boolean checkPassword(int userId, String password) throws ClassNotFoundEx
 		    }
 		    
 		    return accountDetailsList;
+	}
+	
+	public double getWalletBalance(int id) throws ClassNotFoundException, SQLException {
+		
+		ConnectUtil connect = new ConnectUtil();
+		Connection connection = connect.getConnection();
+		
+		String query = "select balance from wallets where user_id = ?";
+		
+		PreparedStatement prepareStatement = connection.prepareStatement(query);
+		
+		prepareStatement.setInt(1, id);
+		
+		ResultSet rows = prepareStatement.executeQuery();
+		ResultSetMetaData metaData = rows.getMetaData();
+		int columnCount = metaData.getColumnCount();
+		
+		while(rows.next())
+		{
+			for(int i=1; i<=columnCount; i+=1)
+			{
+				return rows.getDouble(i);
+			}
+		}
+		return 0;
 	}
 }
